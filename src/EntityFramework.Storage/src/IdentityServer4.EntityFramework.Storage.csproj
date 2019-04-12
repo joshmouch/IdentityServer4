@@ -17,17 +17,29 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 
+    <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    
     <AssemblyOriginatorKeyFile>../key.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="IdentityServer4.Storage" />
     <PackageReference Include="AutoMapper" Version="8.0.0" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Storage\src\IdentityServer4.Storage.csproj" />
   </ItemGroup>
 
 </Project>
